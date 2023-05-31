@@ -1,8 +1,23 @@
 from src.channel import Channel
+import json
+import os
+from googleapiclient.discovery import build
+
+
+# YT_API_KEY скопирован из гугла и вставлен в переменные окружения
+api_key: str = os.getenv('YT_API_KEY')
+
+youtube = build('youtube', 'v3', developerKey=api_key)
+
+
+channel_id = 'UC-OVMPlMA3-YCIeg4z5z23A'
+channel = youtube.channels().list(id=channel_id, part='snippet,statistics').execute()
+
 
 if __name__ == '__main__':
-    moscowpython = Channel('UC-OVMPlMA3-YCIeg4z5z23A')
-    moscowpython.print_info()
+    moscowpython = Channel(channel_id)
+    print(moscowpython.print_info(youtube))
+
 
     """
 {
