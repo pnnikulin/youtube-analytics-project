@@ -1,17 +1,6 @@
 from src.channel import Channel
-import json
-import os
-from googleapiclient.discovery import build
-
-
-# YT_API_KEY скопирован из гугла и вставлен в переменные окружения
-api_key: str = os.getenv('YT_API_KEY')
-
-youtube = build('youtube', 'v3', developerKey=api_key)
-
-
-channel_id = 'UC-OVMPlMA3-YCIeg4z5z23A'
-channel = youtube.channels().list(id=channel_id, part='snippet,statistics').execute()
+from src.channel import channel_id
+from src.channel import youtube
 
 
 if __name__ == '__main__':
