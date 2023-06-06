@@ -1,11 +1,11 @@
 from src.channel import Channel
 from src.channel import channel_id
-from src.channel import youtube
+
 
 
 if __name__ == '__main__':
     moscowpython = Channel(channel_id)
-    print(moscowpython.print_info(youtube))
+    print(moscowpython.print_info())
 
 
     """
