@@ -21,6 +21,20 @@ class Channel:
         self.video_count = self.api_response['items'][0]['statistics']['videoCount']
         self.viewCount = self.api_response['items'][0]['statistics']['viewCount']
 
+    def __str__(self):
+        return f"{self.title} {self.url}"
+
+    def __add__(self, other):
+        return int(self.subscriberCount) + int(other.subscriberCount)
+
+    def __sub__(self, other):
+        return int(self.subscriberCount) - int(other.subscriberCount)
+
+    def __gt__(self, other):
+        return int(self.subscriberCount) > int(other.subscriberCount)
+
+    def __ge__(self, other):
+        return int(self.subscriberCount) >= int(other.subscriberCount)
 
     @property
     def channel_id(self):
@@ -49,4 +63,3 @@ class Channel:
 
         with open(self.output_file, 'w') as outfile:
             outfile.write(self.json_data)
-
