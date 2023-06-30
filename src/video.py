@@ -14,13 +14,23 @@ class Video:
                                                               'liveStreamingDetails,player',
                                                          id=video_id).execute()  # запрос к youtube по id video
 
+        try:
         #print(json.dumps(self.video_response, indent=2, ensure_ascii=False))  # для просмотра в JSON формате
-        self.video_title: str = self.video_response['items'][0]['snippet']['title']  # название видео
-        self.video_url: str = self.video_response['items'][0]['player']['embedHtml']  # ссылка на видео в HTML  строке
-        self.video_url_direct = f"www.youtube.com/embed/{self.video_id}"  #ссылка на видео через video_id
-        self.view_count: int = self.video_response['items'][0]['statistics']['viewCount']  # количество просмотров
-        self.like_count: int = self.video_response['items'][0]['statistics']['likeCount']  # количество лайков
-        self.comment_count: int = self.video_response['items'][0]['statistics']['commentCount']  # количество комментов
+            self.video_title: str = self.video_response['items'][0]['snippet']['title']  # название видео
+            self.video_url: str = self.video_response['items'][0]['player']['embedHtml']  # ссылка на видео в HTML  строке
+            self.video_url_direct = f"www.youtube.com/embed/{self.video_id}"  #ссылка на видео через video_id
+            self.view_count: int = self.video_response['items'][0]['statistics']['viewCount']  # количество просмотров
+            self.like_count: int = self.video_response['items'][0]['statistics']['likeCount']  # количество лайков
+            self.comment_count: int = self.video_response['items'][0]['statistics']['commentCount']  # количество комментов
+
+        except IndexError:
+            self.video_title = None
+            self.video_url = None
+            self.video_url_direct = None
+            self.view_count = None
+            self.like_count = None
+            self.comment_count = None
+            #raise IndexError(f"Wrong Video_ID {self.video_id}")
 
     def __str__(self):
         return f"{self.video_title}"
